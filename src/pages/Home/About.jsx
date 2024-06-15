@@ -17,12 +17,12 @@ const About = () => {
           There are many variations of passages of Lorem Ipsum available, but
           the majority have suffered alteration in some form, by injected
           humour, or randomised words which don&apos;t look even slightly
-          believable.{" "}
+          believable.
         </p>
         <p className="text-[#737373]">
           the majority have suffered alteration in some form, by injected
           humour, or randomised words which don&apos;t look even slightly
-          believable.{" "}
+          believable.
         </p>
         <button className="text-white hover:text-[#FF3811]  text-sm font-semibold py-4 px-7 rounded-md border border-[#FF3811] hover:border-[#FF3811]   bg-[#FF3811] hover:bg-transparent transition-all">
           Get More Info

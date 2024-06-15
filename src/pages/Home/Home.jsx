@@ -1,4 +1,5 @@
 import About from "./About";
+import Services from "./Services";
 import Slider from "./Slider/Slider";
 
 const Home  = () => {
@@ -6,6 +7,7 @@ const Home  = () => {
         <div className="px-16 py-4">
             <Slider></Slider>
             <About></About>
+            <Services></Services>
         </div>
     );
 };
