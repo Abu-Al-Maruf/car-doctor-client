@@ -2,8 +2,22 @@ import { MdOutlineShoppingBag } from "react-icons/md";
 import { IoSearchOutline } from "react-icons/io5";
 import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        alert("Sign-out successful.");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <nav className="flex justify-between items-center px-16 py-4">
       <Link to={"/"}>
@@ -20,12 +34,21 @@ const Navbar = () => {
         <li>
           <Link>Services</Link>
         </li>
-        <li>
-          <Link>Blog</Link>
-        </li>
-        <li>
-          <Link>Contact</Link>
-        </li>
+
+        {user ? (
+          <>
+            <li>
+              <Link to={"/orders"}>My Orders</Link>
+            </li>
+            <li>
+              <Link onClick={handleLogOut}>Logout</Link>
+            </li>
+          </>
+        ) : (
+          <li>
+            <Link to={"/login"}>Login</Link>
+          </li>
+        )}
       </ul>
 
       <div className="flex items-center gap-6 text-2xl">
