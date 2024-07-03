@@ -42,6 +42,7 @@ const SignUp = () => {
               type="text"
               id="name"
               name="name"
+              placeholder="Name"
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500"
             />
           </div>
@@ -53,6 +54,7 @@ const SignUp = () => {
               type="email"
               id="email"
               name="email"
+              placeholder="Email"
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500"
             />
           </div>
@@ -64,6 +66,7 @@ const SignUp = () => {
               type="password"
               id="password"
               name="password"
+              placeholder="Password"
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500"
             />
           </div>

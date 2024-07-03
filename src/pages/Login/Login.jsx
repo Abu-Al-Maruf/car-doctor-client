@@ -1,29 +1,41 @@
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import loginImg from "../../assets/images/login/login.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import axios from "axios";
 
 const Login = () => {
-    const { loginUser } = useContext(AuthContext);
+  const { loginUser } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(email, password);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
 
-        loginUser(email, password)
-        .then((res) => {
-          console.log(res.user);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      };
+    loginUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+        const user = { email };
 
+        axios
+          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.success) {
+              navigate(location?.state ? location?.state : "/");
+            }
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="min-h-screen flex gap-10 py-20 items-center justify-center bg-gray-100">
@@ -42,6 +54,7 @@ const Login = () => {
               type="email"
               id="email"
               name="email"
+              placeholder="Email"
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500"
             />
           </div>
@@ -53,6 +66,7 @@ const Login = () => {
               type="password"
               id="password"
               name="password"
+              placeholder="Password"
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-indigo-500"
             />
           </div>
