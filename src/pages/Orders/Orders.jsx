@@ -10,16 +10,9 @@ const Orders = () => {
   const url = `http://localhost:5000/checkout?email=${user?.email}`;
 
   useEffect(() => {
-    axios.get(url, { withCredentials: true })
-    .then((res) => {
+    axios.get(url, { withCredentials: true }).then((res) => {
       setOrders(res.data);
     });
-    // fetch(url)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     // console.log(data);
-    //     setOrders(data);
-    //   });
   }, [url]);
 
   const handleDelete = (id) => {

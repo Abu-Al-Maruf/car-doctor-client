@@ -27,6 +27,7 @@ const Checkout = () => {
 
     fetch("http://localhost:5000/checkout", {
       method: "POST",
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
       },
