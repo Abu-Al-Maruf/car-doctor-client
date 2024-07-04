@@ -1,25 +1,31 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import OrdersCard from "./OrdersCard";
-import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Orders = () => {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
+  const axiosSecure = useAxiosSecure();
 
-  const url = `http://localhost:5000/checkout?email=${user?.email}`;
+  const url = `/checkout?email=${user?.email}`;
 
   useEffect(() => {
-    axios.get(url, { withCredentials: true }).then((res) => {
+    // axios.get(url, { withCredentials: true }).then((res) => {
+    //   setOrders(res.data);
+    // });
+
+    axiosSecure.get(url).then((res) => {
       setOrders(res.data);
     });
-  }, [url]);
+    
+  }, [url, axiosSecure]);
 
   const handleDelete = (id) => {
     console.log(id);
     const procced = confirm("are you sure to delete?");
     if (procced) {
-      fetch(`http://localhost:5000/checkout/${id}`, {
+      fetch(`https://car-doctor-server-kappa-wine.vercel.app/checkout/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -35,7 +41,7 @@ const Orders = () => {
   };
 
   const handleUpdate = (id) => {
-    fetch(`http://localhost:5000/checkout/${id}`, {
+    fetch(`https://car-doctor-server-kappa-wine.vercel.app/checkout/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

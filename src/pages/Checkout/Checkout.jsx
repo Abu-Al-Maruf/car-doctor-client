@@ -25,7 +25,7 @@ const Checkout = () => {
     };
     console.log(order);
 
-    fetch("http://localhost:5000/checkout", {
+    fetch("https://car-doctor-server-kappa-wine.vercel.app/checkout", {
       method: "POST",
       credentials: 'include',
       headers: {
